@@ -1,0 +1,33 @@
+
+Model
+- Determines and holds positions of particles at a point in time (a non-trivial, consumptive calculation)
+
+View (main window)
+- Renders the 3D visual of the particles at any point as represented in model
+- Responds to zoom, pan, rotate, speed settings
+
+Controller (separate floater windows)
+- Select bodies for sim run
+- Starts/stops animation
+- Takes input to alter characteristics of bodies
+- Takes input to set up unexpected bodies (fly-thru)
+
+Sequence
+    1. Update model
+    2. Render model
+
+
+axisLength
+axisWidth
+
+-X
+new Point3D(-axisLength / 2D,  axisWidth / 2D,  axisWidth / 2D) // 0
+new Point3D(-axisLength / 2D,  axisWidth / 2D, -axisWidth / 2D) // 1
+new Point3D(-axisLength / 2D, -axisWidth / 2D,  axisWidth / 2D) // 2
+new Point3D(-axisLength / 2D, -axisWidth / 2D, -axisWidth / 2D) // 3
+
++X
+new Point3D(axisLength / 2D,  axisWidth / 2D,  axisWidth / 2D) // 4
+new Point3D(axisLength / 2D,  axisWidth / 2D, -axisWidth / 2D) // 5
+new Point3D(axisLength / 2D, -axisWidth / 2D,  axisWidth / 2D) // 6
+new Point3D(axisLength / 2D, -axisWidth / 2D, -axisWidth / 2D) // 7
