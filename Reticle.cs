@@ -8,7 +8,6 @@ namespace OrbitalSimWPF
 {
     public class Reticle
     {
-        Model3DGroup Model3DGroup { get; set; }
         public GeometryModel3D ReticleModel { get; set; }
         private Point3D CurrLocation = new(), NewLocation = new();
         private TranslateTransform3D TranslateTransform3D { get; } = new();
@@ -21,33 +20,25 @@ namespace OrbitalSimWPF
             FillBehavior = FillBehavior.HoldEnd
         };
 
-        public Reticle(Model3DGroup model3DGroup)
+        public Reticle()
         {
-
-            Model3DGroup = model3DGroup;
-
-            CurrLocation.X = 0D;
-            CurrLocation.Y = 0D;
-            CurrLocation.Z = 0D;
+            CurrLocation.X = CurrLocation.Y = CurrLocation.Z = 0D;
 
             // Reticle model
             MeshGeometry3D SphereMesh = new();
-            Sphere.AddSphere(SphereMesh, CurrLocation, 1D, 10, 10);
+            Sphere.AddSphere(SphereMesh, CurrLocation, .5D, 10, 10);
             ReticleModel = new()
             {
                 Geometry = SphereMesh,
-                Material = new DiffuseMaterial(new SolidColorBrush(Colors.Red))
+                Material = new DiffuseMaterial(new SolidColorBrush(Colors.Red)),
+                Transform = TranslateTransform3D
             };
-
-            ReticleModel.Transform = TranslateTransform3D;
-            Model3DGroup.Children.Add(ReticleModel);
         }
 
         /// <summary>
-        /// Animate reticle to new location
+        /// Position reticle to new location
         /// </summary>
-        /// <param name="posn">Of camera</param>
-        /// <param name="lookVector">Of camera (unit vector)</param>
+        /// <param name="camera"></param>
         public void PositionRecticle(SimCamera camera)
         {
             const double distFromCamera = 100D;
@@ -59,9 +50,9 @@ namespace OrbitalSimWPF
             NewLocation = camera.Position + (distFromCamera * camera.LookDirection);
 
             // Reposition reticle
-            TranslateTransform3D.OffsetX = NewLocation.X; // - CurrLocation.X;
-            TranslateTransform3D.OffsetY = NewLocation.Y; // - CurrLocation.Y;
-            TranslateTransform3D.OffsetZ = NewLocation.Z; // - CurrLocation.Z;
+            TranslateTransform3D.OffsetX = NewLocation.X;
+            TranslateTransform3D.OffsetY = NewLocation.Y;
+            TranslateTransform3D.OffsetZ = NewLocation.Z;
 
             //long dX, dY, dZ;
             //dX = (long)(NewLocation.X - CurrLocation.X);

@@ -96,6 +96,10 @@ namespace OrbitalSimWPF
             // Populate the LookAt Combobox
             LookAtComboBox.Items.Clear();
 
+            LookAtComboBox.Items.Add(Properties.Settings.Default.Origin);
+            LookAtComboBox.Items.Add(Properties.Settings.Default.SystemBarycenter);
+
+            // And an entry for each body in the sim
             foreach (Body b in BodyList.Bodies)
             {
                 if (!b.Selected)
@@ -228,7 +232,7 @@ namespace OrbitalSimWPF
 
             //System.Diagnostics.Debug.WriteLine("SimViewportGrid_MouseUp " + p.X + " " + p.Y);
         }
-        
+
         // https://stackoverflow.com/questions/16966264/what-event-handler-to-use-for-combobox-item-selected-selected-item-not-necessar
         private void LookAtDropDownOpened(object sender, EventArgs e)
         {
@@ -238,8 +242,16 @@ namespace OrbitalSimWPF
         private void LookAtSelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             if (LookAtComboBox.SelectedItem != null)
-                if (null!=SimCamera)
-                    SimCamera.LookAt(BodyList.GetPosition((String)LookAtComboBox.SelectedItem));
+                if (null != SimCamera)
+                {
+                    if (((String)LookAtComboBox.SelectedItem).Equals(Properties.Settings.Default.Origin))
+                        SimCamera.LookAt(new(0D, 0D, 0D));
+                    else if (((String)LookAtComboBox.SelectedItem).Equals(Properties.Settings.Default.SystemBarycenter))
+                        // Barycenter, from JPL, not being captured yet, use 0,0,0 for now
+                        SimCamera.LookAt(new(0D, 0D, 0D));
+                    else
+                        SimCamera.LookAt(BodyList.GetPosition((String)LookAtComboBox.SelectedItem));
+                }
         }
     }
 }

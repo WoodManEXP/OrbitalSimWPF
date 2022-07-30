@@ -16,7 +16,7 @@ namespace OrbitalSimWPF
         public static PerspectiveCamera Camera { get; } = new()
         {
             FarPlaneDistance = 2.5E09,
-            NearPlaneDistance = 1.5E6
+            NearPlaneDistance = 0D
         };
 
         public Point3D Position { get { return Camera.Position; } set { Camera.Position = value; } }
@@ -51,8 +51,6 @@ namespace OrbitalSimWPF
         private bool AnimatingPosn { get; set; }
         private bool AnimatingLD { get; set; }
         private bool AnimatingUD { get; set; }
-
-        private Model3DGroup Model3DGroup { get; set; }
         private Reticle Reticle { get; set; }
 
         /// <summary>
@@ -68,8 +66,8 @@ namespace OrbitalSimWPF
             Position = cameraPosition;
             Camera.FieldOfView = v;
 
-            Model3DGroup = simModel.Model3DGroup;
-            Reticle = new(Model3DGroup);
+            Reticle = new();
+            simModel.Model3DGroup.Children.Add(Reticle.ReticleModel);
 
             Point3DAnimation.Completed += new EventHandler(AnimationCompletedPosn);
             Vector3DAnimationLD.Completed += new EventHandler(AnimationCompletedLD);

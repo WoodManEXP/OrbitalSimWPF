@@ -29,7 +29,7 @@ namespace OrbitalSimWPF
         public double Mass { get; set; }
         public double GM { get; set; }
 
-        static private MeshGeometry3D SharedBodySphereMesh = null;
+        static private MeshGeometry3D? SharedBodySphereMesh;
         private Transform3DGroup Transform3DGroup { get; } = new();
 
         public Body(Boolean selected       /* 1 */
@@ -110,8 +110,8 @@ namespace OrbitalSimWPF
             TranslateTransform3D translateTransform3D = new(new(X, Y, Z));
             ScaleTransform3D scaleTransform3D = new(new(Diameter, Diameter, Diameter));
 
-            Transform3DGroup.Children.Add(translateTransform3D);
             Transform3DGroup.Children.Add(scaleTransform3D);
+            Transform3DGroup.Children.Add(translateTransform3D);
 
             DiffuseMaterial diffuseMaterial = new(new SolidColorBrush(Colors.Yellow));
 

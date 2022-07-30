@@ -144,5 +144,29 @@ namespace OrbitalSimWPF.Properties {
                 this["SavedBodyListFile"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Origin")]
+        public string Origin {
+            get {
+                return ((string)(this["Origin"]));
+            }
+            set {
+                this["Origin"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("System barycenter")]
+        public string SystemBarycenter {
+            get {
+                return ((string)(this["SystemBarycenter"]));
+            }
+            set {
+                this["SystemBarycenter"] = value;
+            }
+        }
     }
 }

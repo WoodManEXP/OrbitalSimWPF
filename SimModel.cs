@@ -52,7 +52,7 @@ namespace OrbitalSimWPF
                 if (!b.Selected)
                     continue;
 
-                if (!b.ID.Equals("10")) // Only Sol
+                if (!b.Name.Equals("Sun")) // Only Sol for now
                     continue;
 
                 Model3DGroup.Children.Add(b.InitBody());

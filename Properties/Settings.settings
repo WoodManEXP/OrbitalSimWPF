@@ -32,5 +32,11 @@
     <Setting Name="SavedBodyListFile" Type="System.String" Scope="User">
       <Value Profile="(Default)">Properties\SavedBodyListFile</Value>
     </Setting>
+    <Setting Name="Origin" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Origin</Value>
+    </Setting>
+    <Setting Name="SystemBarycenter" Type="System.String" Scope="User">
+      <Value Profile="(Default)">System barycenter</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
