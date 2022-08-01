@@ -168,5 +168,17 @@ namespace OrbitalSimWPF.Properties {
                 this["SystemBarycenter"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Properties\\Images")]
+        public string ImagesDir {
+            get {
+                return ((string)(this["ImagesDir"]));
+            }
+            set {
+                this["ImagesDir"] = value;
+            }
+        }
     }
 }

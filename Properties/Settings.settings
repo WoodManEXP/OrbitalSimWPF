@@ -38,5 +38,8 @@
     <Setting Name="SystemBarycenter" Type="System.String" Scope="User">
       <Value Profile="(Default)">System barycenter</Value>
     </Setting>
+    <Setting Name="ImagesDir" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Properties\Images</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Reflection;
 using System.Text.Json.Serialization;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Media.Media3D;
 
 namespace OrbitalSimWPF
@@ -113,7 +115,27 @@ namespace OrbitalSimWPF
             Transform3DGroup.Children.Add(scaleTransform3D);
             Transform3DGroup.Children.Add(translateTransform3D);
 
-            DiffuseMaterial diffuseMaterial = new(new SolidColorBrush(Colors.Yellow));
+            DiffuseMaterial diffuseMaterial;// = new(new SolidColorBrush(Colors.Yellow));
+
+            // Select image for body, if present
+            String? imagePath = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), Properties.Settings.Default.ImagesDir);
+            imagePath = Name switch
+            {
+                "Sun" => System.IO.Path.Combine(imagePath, "sun.jpg"),
+                "Earth" => System.IO.Path.Combine(imagePath, "earth.jpg"),
+                "Moon" => System.IO.Path.Combine(imagePath, "moon.jpg"),
+                "Mars" => System.IO.Path.Combine(imagePath, "mars.jpg"),
+                _ => null,
+            };
+            if (null!=imagePath)
+            {
+                ImageBrush imageBrush = new();
+                imageBrush.ImageSource = new BitmapImage(new Uri(imagePath, UriKind.Absolute));
+                diffuseMaterial = new(imageBrush);
+            }
+            else { 
+                diffuseMaterial = new(new SolidColorBrush(Colors.DarkSlateGray)); 
+            }
 
             GeometryModel3D geometryModel = new()
             {

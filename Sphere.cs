@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Drawing;
 using System.Windows.Media.Media3D;
 
 /*
@@ -62,6 +60,9 @@ namespace OrbitalSimWPF
                     // Create the triangles.
                     AddSmoothTriangle(mesh, dictionary, pt00, pt11, pt10);
                     AddSmoothTriangle(mesh, dictionary, pt00, pt01, pt11);
+
+                    // Texture coords are useful if/when an ImageBrush is used
+                    mesh.TextureCoordinates.Add(new System.Windows.Point((double)j / num_theta, (double)i / num_phi)); // texture coordinates are scaled so they range from 0 to 1 for the phi and theta values
 
                     // Move to the next value of theta.
                     theta0 = theta1;
